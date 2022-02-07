@@ -2,12 +2,15 @@
   "name": "internet-shop",
   "version": "1.0.0",
   "description": " ",
-  "main": "index.js",
+  "private": true,
+  "homepage": "https://diamond-almaz.github.io/internet-shop/",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
-    "lint": "eslint --ext .ts,.tsx src --fix"
+    "lint": "eslint --ext .ts,.tsx src --fix",
+    "deploy": "gh-pages -d dist",
+    "preddeploy": "npm run build"
   },
   "browserslist": "> 0.25%, not dead",
   "author": "",
