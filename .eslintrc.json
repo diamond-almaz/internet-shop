@@ -30,6 +30,7 @@
     "rules": {
         "require-jsdoc": "off",
         "@typescript-eslint/ban-ts-comment": "off",
-        "@typescript-eslint/ban-types": "off"
+        "@typescript-eslint/ban-types": "off",
+        "no-unused-vars": "off"
     }
 }
