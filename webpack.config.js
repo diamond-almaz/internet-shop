@@ -43,13 +43,13 @@ const cssLoaders = (extra) => {
 const getFileName = (ext) =>
   isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 
-const babelOptions = (preset) => {
+const babelOptions = (presets) => {
   const defaultOptions = {
     presets: ["@babel/preset-env"],
   };
 
-  if (preset) {
-    defaultOptions.presets.push(preset);
+  if (presets) {
+    defaultOptions.presets = [...defaultOptions.presets, ...presets];
   }
 
   return defaultOptions;
@@ -129,19 +129,14 @@ module.exports = {
         },
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: babelOptions("@babel/preset-typescript"),
-        },
-      },
-      {
-        test: /\.[tj]sx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: babelOptions("@babel/preset-react"),
+          options: babelOptions([
+            "@babel/preset-react",
+            "@babel/preset-typescript",
+          ]),
         },
       },
     ],
