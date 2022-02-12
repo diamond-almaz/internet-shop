@@ -45,7 +45,15 @@ const getFileName = (ext) =>
 
 const babelOptions = (presets) => {
   const defaultOptions = {
-    presets: ["@babel/preset-env"],
+    presets: [
+      [
+        "@babel/preset-env",
+        {
+          useBuiltIns: "entry",
+        },
+      ],
+    ],
+    plugins: ["@babel/plugin-proposal-class-properties"],
   };
 
   if (presets) {
@@ -59,7 +67,7 @@ module.exports = {
   context: path.resolve(__dirname, "src"),
 
   entry: {
-    app: "./app.tsx",
+    app: ["@babel/polyfill", "./app.tsx"],
   },
 
   output: {
@@ -129,7 +137,7 @@ module.exports = {
         },
       },
       {
-        test: /\.tsx$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
