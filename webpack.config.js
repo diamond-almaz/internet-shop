@@ -112,6 +112,12 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
 
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+
   module: {
     rules: [
       {
