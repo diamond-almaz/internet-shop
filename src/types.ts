@@ -1,9 +1,7 @@
 import { rootReducer } from "./redux/reducers";
 
 export interface IDealer {
-  name: string;
-  price: number;
-  image: string;
+  id: string;
 }
 
 export interface IProductItem {
