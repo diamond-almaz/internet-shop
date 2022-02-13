@@ -24,14 +24,19 @@ export const busketPageReducer = (
   switch (action.type) {
     case ADD_PRODUCT: {
       const addedProduct: IBusketItem = action.product;
-
       if (newBasketItems[addedProduct.name] !== undefined) {
-        newBasketItems[addedProduct.name].totalCount += 1;
+        const newTotalCount = newBasketItems[addedProduct.name].totalCount + 1;
+        newBasketItems[addedProduct.name] = {
+          ...addedProduct,
+          totalCount: newTotalCount,
+          totalCost: addedProduct.price * newTotalCount,
+        };
       } else {
-        newBasketItems[addedProduct.name] = addedProduct;
-        newBasketItems[addedProduct.name].totalCount = 1;
-        newBasketItems[addedProduct.name].totalCost =
-          newBasketItems[addedProduct.name].price;
+        newBasketItems[addedProduct.name] = {
+          ...addedProduct,
+          totalCount: 1,
+          totalCost: addedProduct.price,
+        };
       }
 
       return {
