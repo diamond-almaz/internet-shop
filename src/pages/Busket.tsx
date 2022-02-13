@@ -11,6 +11,7 @@ import {
 } from "../redux/busket/actions";
 import { IBusketPage, IStore, IBasketItem } from "../types";
 import { BusketTable } from "../UI/components/BusketTable";
+import { formatNumber } from "../helpers";
 
 export const Busket = () => {
   const state = useSelector<IStore, IBusketPage>((store) => store.busketPage);
@@ -32,7 +33,7 @@ export const Busket = () => {
       <AllTotalCount>Товаров в корзине: {state.allTotalCount}</AllTotalCount>
 
       <AllTotalCost>
-        Общая сумма: {state.allTotalCost.toFixed(2)} $
+        Общая сумма: {formatNumber(state.allTotalCost)} $
       </AllTotalCost>
 
       <BusketTable
