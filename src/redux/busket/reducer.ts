@@ -24,6 +24,7 @@ export const busketPageReducer = (
   switch (action.type) {
     case ADD_PRODUCT: {
       const addedProduct: IBusketItem = action.product;
+
       if (newBasketItems[addedProduct.name] !== undefined) {
         const newTotalCount = newBasketItems[addedProduct.name].totalCount + 1;
         newBasketItems[addedProduct.name] = {
@@ -65,27 +66,20 @@ export const busketPageReducer = (
 
     case CHANGE_COUNT_PRODUCT: {
       const { name, count } = action;
-
       const changedProduct = newBasketItems[name];
 
-      let allTotalCount = 0;
-      let allTotalCost = 0;
+      const allTotalCount =
+        state.allTotalCount - changedProduct.totalCount + count;
+      const allTotalCost =
+        state.allTotalCount -
+        changedProduct.totalCount +
+        changedProduct.price * count;
 
-      if (changedProduct.totalCount < count) {
-        allTotalCount = state.allTotalCount - changedProduct.totalCount + count;
-        allTotalCost =
-          state.allTotalCost -
-          changedProduct.totalCost +
-          changedProduct.price * count;
-        changedProduct.totalCount = count;
-        changedProduct.totalCost =
-          changedProduct.price * changedProduct.totalCount;
-      } else {
-        allTotalCount = state.allTotalCount - count;
-        allTotalCost = state.allTotalCost - changedProduct.price * count;
-        changedProduct.totalCount -= count;
-        changedProduct.totalCost = changedProduct.price * count;
-      }
+      newBasketItems[name] = {
+        ...changedProduct,
+        totalCost: count * changedProduct.price,
+        totalCount: count,
+      };
 
       return {
         ...state,
