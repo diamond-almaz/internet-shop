@@ -65,6 +65,7 @@ const ProductCardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   grid-gap: 38px;
+  justify-content: center;
 `;
 
 const FoundedProducts = styled.div`

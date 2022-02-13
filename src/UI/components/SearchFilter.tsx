@@ -46,7 +46,6 @@ const Wrapper = styled.div`
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  width: 400px;
   .Select {
     width: 100%;
   }

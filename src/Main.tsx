@@ -29,6 +29,7 @@ export const Main = ({ dealers }: IProps) => {
           <PageWrapper>
             <Switch>
               <Route path="/busket">
+                <Header title="Корзина" />
                 <Busket />
               </Route>
               <Route path="/">
@@ -44,7 +45,7 @@ export const Main = ({ dealers }: IProps) => {
 };
 
 const Wrapper = styled.div`
-  width: 1309px;
+  /* width: 70vw; */
   margin: auto;
   font-family: Open Sans;
   font-style: normal;
