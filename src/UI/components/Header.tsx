@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Roboto;
+  font-weight: 700;
   text-transform: uppercase;
   width: 100%;
   margin-top: 27px;

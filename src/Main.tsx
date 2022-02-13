@@ -3,51 +3,58 @@ import styled from "styled-components";
 
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-import { IDealer } from "./types";
-import { Provider } from "react-redux";
+import { IBusketPage, IDealer, IStore } from "./types";
+import { Provider, useSelector } from "react-redux";
 import { store } from "./redux";
 import { Catalog } from "./pages/Catalog";
 import { Busket } from "./pages/Busket";
 import { MAIN_COLOR } from "./constants";
 import { Header } from "./UI/components/Header";
+import shoppingCartBigIcon from "./UI/img/shoppingCartBig.svg";
 
 interface IProps {
   dealers: IDealer[];
 }
 
 export const Main = ({ dealers }: IProps) => {
-  console.log();
+  const { allTotalCount } = useSelector<IStore, IBusketPage>(
+    (store) => store.busketPage
+  );
+
   return (
-    <Provider store={store}>
-      <Router>
-        <Wrapper>
-          <Navbar>
-            <Link to="/">
-              <Logo>LOGO</Logo>
-            </Link>
-          </Navbar>
-          <PageWrapper>
-            <Switch>
-              <Route path="/busket">
-                <Header title="Корзина" />
-                <Busket />
-              </Route>
-              <Route path="/">
-                <Header title="Каталог" />
-                <Catalog dealers={dealers} />
-              </Route>
-            </Switch>
-          </PageWrapper>
-        </Wrapper>
-      </Router>
-    </Provider>
+    <Router>
+      <Wrapper>
+        <Navbar>
+          <Link to="/">
+            <Logo>LOGO</Logo>
+          </Link>
+          <Link to="/busket">
+            <BusketIcon>
+              <img src={shoppingCartBigIcon} alt="" />
+              {allTotalCount > 0 && <AllTotalCount>{allTotalCount}</AllTotalCount>}
+            </BusketIcon>
+          </Link>
+        </Navbar>
+        <PageWrapper>
+          <Switch>
+            <Route path="/busket">
+              <Header title="Корзина" />
+              <Busket />
+            </Route>
+            <Route path="/">
+              <Header title="Каталог" />
+              <Catalog dealers={dealers} />
+            </Route>
+          </Switch>
+        </PageWrapper>
+      </Wrapper>
+    </Router>
   );
 };
 
 const Wrapper = styled.div`
-  /* width: 70vw; */
   margin: auto;
-  font-family: Open Sans;
+  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
@@ -76,4 +83,18 @@ const Logo = styled.b`
 
 const PageWrapper = styled.div`
   padding: 0 72px;
+`;
+
+const AllTotalCount = styled.span`
+  position: absolute;
+  left: 23px;
+  background-color: brown;
+  color: #FFF;
+  border-radius: 12px;
+  padding: 0 7px;
+  font-size: 15px;
+`;
+
+const BusketIcon = styled.div`
+  position: relative;
 `;

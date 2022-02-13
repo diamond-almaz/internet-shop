@@ -53,7 +53,6 @@ export const Catalog = ({ dealers }: IProps) => {
             );
           })}
       </ProductCardsWrapper>
-      <Link to="/busket">КОРЗИНА</Link>
     </>
   );
 };

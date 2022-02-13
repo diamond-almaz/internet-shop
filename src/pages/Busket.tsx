@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeProduct,
@@ -7,7 +9,8 @@ import {
   plusCountProduct,
   minusCountProduct,
 } from "../redux/busket/actions";
-import { IBusketPage, IStore } from "../types";
+import { IBusketPage, IStore, IBasketItem } from "../types";
+import { BusketTable } from "../UI/components/BusketTable";
 
 export const Busket = () => {
   const state = useSelector<IStore, IBusketPage>((store) => store.busketPage);
@@ -16,18 +19,28 @@ export const Busket = () => {
   const { busketItems } = state;
   const products = Object.values(busketItems);
 
+  const onRemoveProduct = (product: IBasketItem) => {
+    dispatch(removeProduct(product));
+  };
+
+  const onRemoveAll = () => {
+    dispatch(removeAll());
+  };
+
   return (
-    <div>
-      КОРЗИНА
-      <div>Товаров в корзине: {state.allTotalCount}</div>
-      <div>Общая сумма: {state.allTotalCost.toFixed(2)}</div>
-      <button
-        onClick={() => {
-          dispatch(removeAll());
-        }}
-      >
-        Удалить всё
-      </button>
+    <Wrapper>
+      <AllTotalCount>Товаров в корзине: {state.allTotalCount}</AllTotalCount>
+
+      <AllTotalCost>
+        Общая сумма: {state.allTotalCost.toFixed(2)} $
+      </AllTotalCost>
+
+      <BusketTable
+        products={products}
+        onRemoveProduct={onRemoveProduct}
+        onRemoveAll={onRemoveAll}
+      />
+
       {products.length > 0 &&
         products.map((product) => (
           <div>
@@ -66,6 +79,17 @@ export const Busket = () => {
             </div>
           </div>
         ))}
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div``;
+
+const AllTotalCount = styled.div`
+  font-size: 20px;
+`;
+
+const AllTotalCost = styled(AllTotalCount)`
+  margin-top: 10px;
+  margin-bottom: 43px;
+`;

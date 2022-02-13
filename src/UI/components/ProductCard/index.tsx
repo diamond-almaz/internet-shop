@@ -26,7 +26,7 @@ export const ProductCard = (props: IProductCardProps) => {
 
       <ProductName>{product.name}</ProductName>
 
-      <ProductPrice>{product.price}</ProductPrice>
+      <ProductPrice>{product.price} $</ProductPrice>
 
       <AddButton onClick={addHandler}>
         <img src={shoppingCart} alt="" />
