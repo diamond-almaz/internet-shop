@@ -24,7 +24,9 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
         <img src={productImage} alt="" />
         <span>{product.name}</span>
       </ProductNameColumn>
-      <div>{product.totalCount}</div>
+      <ChangeCountContainer>
+        <ChangeCountInput type="number" value={product.totalCount} />
+      </ChangeCountContainer>
       <b>{product.price} $</b>
       <b>{product.totalCost} $</b>
       <RemoveButton onClick={removeProductHandler} />
@@ -48,4 +50,32 @@ const RemoveButton = styled(Button)`
   background-image: url(${trashIcon});
   background-size: 32px;
   background-repeat: no-repeat;
+`;
+
+const ChangeCountContainer = styled.div`
+  position: relative;
+  display: flex;
+  width: 30%;
+  height: 51px;
+  border: 1px solid #3d3d3d;
+  border-radius: 10px;
+  padding: 5px;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    background-color: #3d3d3d;
+    height: 100%;
+    width: 1px;
+  }
+`;
+
+const ChangeCountInput = styled.input`
+  outline: none;
+  border: none;
+  width: calc(50% - 5px);
+  height: 100%;
+  -webkit-appearance: none;
+  margin: 0;
 `;
