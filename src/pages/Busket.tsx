@@ -41,45 +41,6 @@ export const Busket = () => {
         onRemoveProduct={onRemoveProduct}
         onRemoveAll={onRemoveAll}
       />
-
-      {products.length > 0 &&
-        products.map((product) => (
-          <div>
-            <div>{product.name}</div>
-            <div>
-              <input
-                type="number"
-                value={product.totalCount}
-                onChange={(ev) => {
-                  const { value } = ev.currentTarget;
-                  dispatch(changeCountProduct(product.name, Number(value)));
-                }}
-              />
-              <button
-                onClick={() => {
-                  dispatch(plusCountProduct(product.name));
-                }}
-              >
-                +
-              </button>
-              <button
-                disabled={product.totalCount === 0}
-                onClick={() => {
-                  dispatch(minusCountProduct(product.name));
-                }}
-              >
-                -
-              </button>
-              <button
-                onClick={() => {
-                  dispatch(removeProduct(product));
-                }}
-              >
-                Удалить
-              </button>
-            </div>
-          </div>
-        ))}
     </Wrapper>
   );
 };
