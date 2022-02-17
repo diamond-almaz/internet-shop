@@ -7,6 +7,7 @@ import {
   REMOVE_ALL,
   REMOVE_PRODUCT,
 } from "./actions";
+import { BigNumber } from "bignumber.js";
 
 const initialState: IBusketPage = {
   busketItems: {},
@@ -30,7 +31,9 @@ export const busketPageReducer = (
         newBasketItems[addedProduct.name] = {
           ...addedProduct,
           totalCount: newTotalCount,
-          totalCost: addedProduct.price * newTotalCount,
+          totalCost: Number(
+            new BigNumber(addedProduct.price).multipliedBy(newTotalCount)
+          ),
         };
       } else {
         newBasketItems[addedProduct.name] = {
@@ -44,7 +47,9 @@ export const busketPageReducer = (
         ...state,
         busketItems: newBasketItems,
         allTotalCount: state.allTotalCount + 1,
-        allTotalCost: state.allTotalCost + addedProduct.price,
+        allTotalCost: Number(
+          new BigNumber(state.allTotalCost).plus(addedProduct.price)
+        ),
       };
     }
 
@@ -55,8 +60,12 @@ export const busketPageReducer = (
       return {
         ...state,
         busketItems: newBasketItems,
-        allTotalCount: state.allTotalCount - addedProduct.totalCount,
-        allTotalCost: state.allTotalCost - addedProduct.totalCost,
+        allTotalCount: Number(
+          new BigNumber(state.allTotalCount).minus(addedProduct.totalCount)
+        ),
+        allTotalCost: Number(
+          new BigNumber(state.allTotalCost).minus(addedProduct.totalCost)
+        ),
       };
     }
 
@@ -68,16 +77,22 @@ export const busketPageReducer = (
       const { name, count } = action;
       const changedProduct = newBasketItems[name];
 
-      const allTotalCount =
-        state.allTotalCount - changedProduct.totalCount + count;
-      const allTotalCost =
-        state.allTotalCount -
-        changedProduct.totalCount +
-        changedProduct.price * count;
+      const allTotalCount = Number(
+        new BigNumber(state.allTotalCount)
+          .minus(changedProduct.totalCount)
+          .plus(count)
+      );
+      const allTotalCost = Number(
+        new BigNumber(state.allTotalCost)
+          .minus(changedProduct.totalCost)
+          .plus(new BigNumber(changedProduct.price).multipliedBy(count))
+      );
 
       newBasketItems[name] = {
         ...changedProduct,
-        totalCost: count * changedProduct.price,
+        totalCost: Number(
+          new BigNumber(count).multipliedBy(changedProduct.price)
+        ),
         totalCount: count,
       };
 
