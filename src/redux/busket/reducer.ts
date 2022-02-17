@@ -2,8 +2,6 @@ import { IBusketItem, IBusketPage } from "../../types";
 import {
   ADD_PRODUCT,
   CHANGE_COUNT_PRODUCT,
-  MINUS_COUNT_PRODUCT,
-  PLUS_COUNT_PRODUCT,
   REMOVE_ALL,
   REMOVE_PRODUCT,
 } from "./actions";
