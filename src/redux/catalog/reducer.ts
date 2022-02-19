@@ -33,7 +33,7 @@ export const catalogPageReducer = (state = initialState, action: any) => {
     case SELECT_DEALERS: {
       return {
         ...state,
-        IDs: action.IDs,
+        selectedDealers: action.IDs,
       };
     }
 

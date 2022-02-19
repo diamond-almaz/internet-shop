@@ -27,6 +27,7 @@ export const Main = ({ dealers }: IProps) => {
 
   useEffect(() => {
     const IDs = store.catalogPage.selectedDealers;
+    console.log("IDs", IDs);
     if (IDs?.length > 0) {
       dispatch(receiveProductsByDealers(IDs));
     } else {
@@ -35,8 +36,6 @@ export const Main = ({ dealers }: IProps) => {
   }, [store.catalogPage.selectedDealers, dispatch]);
 
   // ---------------------------------------------------
-
-
 
   return (
     <Router>
