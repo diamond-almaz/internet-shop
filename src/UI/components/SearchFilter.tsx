@@ -7,7 +7,7 @@ import { Button } from "./styles";
 
 interface ISearchFilter {
   dealers: IDealer[];
-  onSearch: (IDs?: string[]) => void;
+  onSearch: (IDs: string[]) => void;
 }
 
 export const SearchFilter = (props: ISearchFilter) => {

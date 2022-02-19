@@ -29,7 +29,7 @@ export const BusketTable = (props: IBusketTableProps) => {
   return (
     <>
       <Wrapper>
-        <TableRow>
+        <TableHeader>
           <span>Товар</span>
           <span>Количество</span>
           <span>Цена</span>
@@ -41,7 +41,7 @@ export const BusketTable = (props: IBusketTableProps) => {
               onClick={showVisibleConfirmModal}
             />
           </RemoveAllColumn>
-        </TableRow>
+        </TableHeader>
         {products.map((product) => (
           <BusketTableItem
             key={product.name}
@@ -64,6 +64,12 @@ export const BusketTable = (props: IBusketTableProps) => {
 
 const Wrapper = styled.div`
   width: 100%;
+`;
+
+const TableHeader = styled(TableRow)`
+  position: sticky;
+  top: 71px;
+  z-index: 2;
 `;
 
 const RemoveAllColumn = styled.div`

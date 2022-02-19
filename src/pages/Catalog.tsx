@@ -30,6 +30,10 @@ interface IProps {
 export const Catalog = ({ products, busket, loading, dealers }: IProps) => {
   const dispatch = useDispatch();
 
+  const selectDealer = (IDs: IDealer[]) => {
+    dispatch(selectDealers(IDs));
+  };
+
   const plusProductHandler = (product: IProductItem) => {
     dispatch(addProduct(product));
   };
@@ -43,7 +47,7 @@ export const Catalog = ({ products, busket, loading, dealers }: IProps) => {
   const productsLenght = productsArray.length;
   return (
     <>
-      <SearchFilter dealers={dealers} onSearch={() => {}} />
+      <SearchFilter dealers={dealers} onSearch={selectDealer} />
 
       {loading ? (
         <Spinner />
