@@ -5,5 +5,6 @@ export const Button = styled.button`
   border: none;
   color: #FFFFFF;
   cursor: pointer;
+  padding: 0;
 }
 `;

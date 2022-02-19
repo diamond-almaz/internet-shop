@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
 import { receiveProducts, receiveProductsByDealers } from "../redux/actions";
-import { addProduct } from "../redux/busket/actions";
-import { ICatalogPage, IDealer, IProductItem, IStore } from "../types";
+import { addProduct, changeCountProduct } from "../redux/busket/actions";
+import { IDealer, IProductItem, IBasketItem, IStore } from "../types";
 import { ProductCard } from "../UI/components/ProductCard";
 import { SearchFilter } from "../UI/components/SearchFilter";
 import { Spinner } from "../UI/components/spinner";
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export const Catalog = ({ dealers }: IProps) => {
-  const state = useSelector<IStore, ICatalogPage>((store) => store.catalogPage);
+  const state = useSelector<IStore, IStore>((store) => store);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,11 +29,18 @@ export const Catalog = ({ dealers }: IProps) => {
     }
   };
 
-  const addProductHandler = (product: IProductItem) => {
+  const plusProductHandler = (product: IProductItem) => {
     dispatch(addProduct(product));
   };
 
-  const { products, loading } = state;
+  const minusProductHandler = (product: IBasketItem, addedCount: number) => {
+    dispatch(changeCountProduct(product.name, addedCount - 1));
+  };
+
+  const {
+    catalogPage: { products, loading },
+    busketPage,
+  } = state;
 
   const productsArray = Object.values(products);
 
@@ -55,7 +62,13 @@ export const Catalog = ({ dealers }: IProps) => {
                   <ProductCard
                     key={product.name}
                     product={product}
-                    onAdd={addProductHandler}
+                    addedCount={
+                      busketPage.busketItems[product.name]
+                        ? busketPage.busketItems[product.name].totalCount
+                        : 0
+                    }
+                    onPlus={plusProductHandler}
+                    onMinus={minusProductHandler}
                   />
                 );
               })}
