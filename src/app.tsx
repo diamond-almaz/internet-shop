@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import { getDealers } from "./api";
 import { IDealer } from "./types";
@@ -9,9 +10,11 @@ import { Provider } from "react-redux";
 
 const start = (dealers: IDealer[]) => {
   render(
-    <Provider store={store}>
-      <Main dealers={dealers} />
-    </Provider>,
+    <Router>
+      <Provider store={store}>
+        <Main dealers={dealers} />
+      </Provider>
+    </Router>,
     document.getElementById("app")
   );
 };
