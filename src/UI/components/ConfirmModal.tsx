@@ -7,6 +7,9 @@ import closeIcon from "../img/close.svg";
 import { MAIN_COLOR } from "../../constants";
 
 const customStyles = {
+  overlay: {
+    zIndex: 2,
+  },
   content: {
     top: "50%",
     left: "50%",
