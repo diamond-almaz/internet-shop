@@ -27,6 +27,7 @@ const Wrapper = styled.div`
   text-transform: uppercase;
   width: 100%;
   margin-top: 27px;
+  margin-bottom: 47px;
 `;
 
 const Title = styled.span`

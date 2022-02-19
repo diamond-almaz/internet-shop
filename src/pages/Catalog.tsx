@@ -57,17 +57,16 @@ export const Catalog = ({ dealers }: IProps) => {
   );
 };
 
-const Wrapper = styled.div`
-`;
-
 const ProductCardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   grid-gap: 38px;
   justify-content: center;
+  padding-bottom: 38px;
 `;
 
 const FoundedProducts = styled.div`
   font-family: Roboto;
   font-size: 20px;
+  margin: 37px 0;
 `;

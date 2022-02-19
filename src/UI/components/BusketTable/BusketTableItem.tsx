@@ -128,6 +128,8 @@ const CounterInput = styled.input<{ isRed: boolean }>`
   height: 100%;
   margin: 0;
   color: ${({ isRed }) => (isRed ? "#c21750" : "#3d3d3d")};
+  text-align: center;
+  padding: 0;
 
   margin: 0;
   ::-webkit-outer-spin-button,
@@ -142,12 +144,14 @@ const CounerTriggers = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 50%;
 `;
 
 const CounerTriggerButton = styled(Button)`
   color: black;
   width: 25px;
   height: 25px;
+  padding: 0;
   :nth-child(2) {
     img {
       transform: rotate(180deg);

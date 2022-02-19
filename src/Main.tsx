@@ -31,7 +31,9 @@ export const Main = ({ dealers }: IProps) => {
           <Link to="/busket">
             <BusketIcon>
               <img src={shoppingCartBigIcon} alt="" />
-              {allTotalCount > 0 && <AllTotalCount>{allTotalCount}</AllTotalCount>}
+              {allTotalCount > 0 && (
+                <AllTotalCount>{allTotalCount}</AllTotalCount>
+              )}
             </BusketIcon>
           </Link>
         </Navbar>
@@ -62,6 +64,8 @@ const Wrapper = styled.div`
 `;
 
 const Navbar = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   background-color: ${MAIN_COLOR};
@@ -89,7 +93,7 @@ const AllTotalCount = styled.span`
   position: absolute;
   left: 23px;
   background-color: brown;
-  color: #FFF;
+  color: #fff;
   border-radius: 12px;
   padding: 0 7px;
   font-size: 15px;

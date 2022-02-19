@@ -31,7 +31,7 @@ export const ProductCard = (props: IProductCardProps) => {
       </Content>
       <AddButton onClick={addHandler}>
         <img src={shoppingCart} alt="" />
-        <b>В корзину</b>
+        <b>Добавить</b>
       </AddButton>
     </Wrapper>
   );
