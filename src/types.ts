@@ -12,6 +12,8 @@ export interface IProductItem {
 
 export interface ICatalogPage {
   products: IProductItem[];
+
+  loading: boolean;
 }
 
 export interface IBusketItem extends IProductItem {

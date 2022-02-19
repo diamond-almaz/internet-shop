@@ -9,6 +9,7 @@ import { ICatalogPage, IDealer, IProductItem, IStore } from "../types";
 import { ProductCard } from "../UI/components/ProductCard";
 import { Header } from "../UI/components/Header";
 import { SearchFilter } from "../UI/components/SearchFilter";
+import { Spinner } from "../UI/components/spinner";
 
 interface IProps {
   dealers: IDealer[];
@@ -34,25 +35,33 @@ export const Catalog = ({ dealers }: IProps) => {
     dispatch(addProduct(product));
   };
 
-  const productsLenght = state.products.length;
+  const { products, loading } = state;
+
+  const productsLenght = products.length;
   return (
     <>
       <SearchFilter dealers={dealers} onSearch={onSearch} />
 
-      <FoundedProducts>Найдено товаров: {productsLenght}</FoundedProducts>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <FoundedProducts>Найдено товаров: {productsLenght}</FoundedProducts>
 
-      <ProductCardsWrapper>
-        {productsLenght > 0 &&
-          state.products.map((product) => {
-            return (
-              <ProductCard
-                key={product.name}
-                product={product}
-                onAdd={addProductHandler}
-              />
-            );
-          })}
-      </ProductCardsWrapper>
+          <ProductCardsWrapper>
+            {productsLenght > 0 &&
+              state.products.map((product) => {
+                return (
+                  <ProductCard
+                    key={product.name}
+                    product={product}
+                    onAdd={addProductHandler}
+                  />
+                );
+              })}
+          </ProductCardsWrapper>
+        </>
+      )}
     </>
   );
 };
