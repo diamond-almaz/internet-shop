@@ -22,12 +22,13 @@ export const ProductCard = (props: IProductCardProps) => {
 
   return (
     <Wrapper>
-      <ProductImage src={productImage} alt="" />
+      <Content>
+        <ProductImage src={productImage} alt="" />
 
-      <ProductName>{product.name}</ProductName>
+        <ProductName>{product.name}</ProductName>
 
-      <ProductPrice>{product.price} $</ProductPrice>
-
+        <ProductPrice>{product.price} $</ProductPrice>
+      </Content>
       <AddButton onClick={addHandler}>
         <img src={shoppingCart} alt="" />
         <b>В корзину</b>
@@ -37,12 +38,15 @@ export const ProductCard = (props: IProductCardProps) => {
 };
 
 const Wrapper = styled.div`
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+`;
+
+const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #ffffff;
-  padding: 10px 17px 6px 10px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  padding: 10px 17px 0px 10px;
 `;
 
 const ProductName = styled.span`
@@ -60,12 +64,17 @@ const ProductPrice = styled.b`
 const AddButton = styled(Button)`
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: 13px;
   line-height: 15px;
-  padding: 5px 15px;
+  padding: 8px 15px;
   background-color: ${MAIN_COLOR};
+  width: 100%;
 
-  border-radius: 4px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
   cursor: pointer;
 
   img {
