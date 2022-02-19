@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import { IBusketItem } from "../../../types";
 import { TableRow } from "./styles";
@@ -8,7 +9,7 @@ import trashIcon from "../../img/trash.svg";
 import { Button } from "../styles";
 import { formatNumber } from "../../../helpers";
 import { changeCountProduct } from "../../../redux/busket/actions";
-import { useDispatch } from "react-redux";
+import caretIcon from "../../img/caretUp.svg";
 
 interface IBusketTableItemProps {
   product: IBusketItem;
@@ -50,11 +51,22 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
         <span>{product.name}</span>
       </ProductNameColumn>
 
-      <CounterContainer isRedBorder={count === 0}>
-        <CounterInput type="number" value={count} onChange={onChangeInput} />
+      <CounterContainer>
+        <CounterInputContainer>
+          <CounterInput
+            type="number"
+            value={count}
+            onChange={onChangeInput}
+            isRed={count === 0}
+          />
+        </CounterInputContainer>
         <CounerTriggers>
-          <CounerTriggerButton onClick={plusCount}>+</CounerTriggerButton>
-          <CounerTriggerButton onClick={minusCount}>-</CounerTriggerButton>
+          <CounerTriggerButton onClick={plusCount}>
+            <img src={caretIcon} alt="" />
+          </CounerTriggerButton>
+          <CounerTriggerButton onClick={minusCount}>
+            <img src={caretIcon} alt="" />
+          </CounerTriggerButton>
         </CounerTriggers>
       </CounterContainer>
 
@@ -85,14 +97,13 @@ const RemoveButton = styled(Button)`
   background-repeat: no-repeat;
 `;
 
-const CounterContainer = styled.div<{ isRedBorder: boolean }>`
+const CounterContainer = styled.div`
   position: relative;
   display: flex;
   width: 30%;
   height: 51px;
-  border: 1px solid ${({ isRedBorder }) => (isRedBorder ? "#94123d" : "#3d3d3d")};
+  border: 1px solid #3d3d3d;
   border-radius: 10px;
-  padding: 5px;
   box-sizing: border-box;
   &::after {
     content: "";
@@ -105,13 +116,26 @@ const CounterContainer = styled.div<{ isRedBorder: boolean }>`
   }
 `;
 
-const CounterInput = styled.input`
+const CounterInputContainer = styled.div`
+  padding: 5px;
+  width: calc(50% - 10px);
+`;
+
+const CounterInput = styled.input<{ isRed: boolean }>`
   outline: none;
   border: none;
-  width: calc(50% - 5px);
+  width: 100%;
   height: 100%;
-  -webkit-appearance: none;
   margin: 0;
+  color: ${({ isRed }) => (isRed ? "#c21750" : "#3d3d3d")};
+
+  margin: 0;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+  }
 `;
 
 const CounerTriggers = styled.div`
@@ -122,4 +146,11 @@ const CounerTriggers = styled.div`
 
 const CounerTriggerButton = styled(Button)`
   color: black;
+  width: 25px;
+  height: 25px;
+  :nth-child(2) {
+    img {
+      transform: rotate(180deg);
+    }
+  }
 `;
