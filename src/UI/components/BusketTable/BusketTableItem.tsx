@@ -109,9 +109,9 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
 const ProductNameColumn = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   img {
-    width: 168px;
-    height: 158px;
+    width: 70%;
   }
   margin-right: 18px;
 `;
@@ -119,6 +119,7 @@ const ProductNameColumn = styled.div`
 const CounterContainer = styled.div`
   position: relative;
   display: flex;
+  min-width: 50px;
   width: 30%;
   height: 51px;
   border: 1px solid #3d3d3d;

@@ -103,15 +103,14 @@ const Content = styled.div`
 const Footer = styled.div`
   display: flex;
   justify-content: flex-end;
-
-  margin-top: 40px;
-
+  flex-wrap: wrap;
   button {
     padding: 5px 10px;
     border-radius: 5px;
     box-sizing: border-box;
     height: 31px;
     font-weight: 300;
+    margin-top: 40px;
   }
 `;
 
