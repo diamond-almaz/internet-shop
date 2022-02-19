@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 import { IBusketItem } from "../../../types";
-import { Button } from "../styles";
+import { Button, RemoveButton } from "../styles";
 import { BusketTableItem } from "./BusketTableItem";
 import { TableRow } from "./styles";
-import trashIcon from "../../img/trash.svg";
 import { ConfirmModal } from "../ConfirmModal";
 
 interface IBusketTableProps {
@@ -26,7 +26,6 @@ export const BusketTable = (props: IBusketTableProps) => {
     setVisibleConfirmModal(false);
   };
 
-
   return (
     <>
       <Wrapper>
@@ -37,7 +36,10 @@ export const BusketTable = (props: IBusketTableProps) => {
           <span>Итого</span>
           <RemoveAllColumn>
             Удалить
-            <RemoveAllButton onClick={showVisibleConfirmModal} />
+            <RemoveButton
+              title="Удаление всех продуктов"
+              onClick={showVisibleConfirmModal}
+            />
           </RemoveAllColumn>
         </TableRow>
         {products.map((product) => (
@@ -67,13 +69,4 @@ const Wrapper = styled.div`
 const RemoveAllColumn = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const RemoveAllButton = styled(Button)`
-  margin-left: 9px;
-  width: 25px;
-  height: 25px;
-  background-image: url(${trashIcon});
-  background-size: 25px;
-  background-repeat: no-repeat;
 `;

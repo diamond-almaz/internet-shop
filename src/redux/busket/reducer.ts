@@ -86,13 +86,17 @@ export const busketPageReducer = (
           .plus(new BigNumber(changedProduct.price).multipliedBy(count))
       );
 
-      newBasketItems[name] = {
-        ...changedProduct,
-        totalCost: Number(
-          new BigNumber(count).multipliedBy(changedProduct.price)
-        ),
-        totalCount: count,
-      };
+      if (count === 0) {
+        delete newBasketItems[name];
+      } else {
+        newBasketItems[name] = {
+          ...changedProduct,
+          totalCost: Number(
+            new BigNumber(count).multipliedBy(changedProduct.price)
+          ),
+          totalCount: count,
+        };
+      }
 
       return {
         ...state,
