@@ -1,9 +1,10 @@
 import { ICatalogPage } from "../../types";
-import { LOAD_PRODUCTS_START, SET_PRODUCTS } from "./actions";
+import { LOAD_PRODUCTS_START, SELECT_DEALERS, SET_PRODUCTS } from "./actions";
 
 const initialState: ICatalogPage = {
   products: {},
   loading: false,
+  selectedDealers: [],
 };
 
 export const catalogPageReducer = (state = initialState, action: any) => {
@@ -26,6 +27,13 @@ export const catalogPageReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: true,
+      };
+    }
+
+    case SELECT_DEALERS: {
+      return {
+        ...state,
+        IDs: action.IDs,
       };
     }
 

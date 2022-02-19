@@ -8,11 +8,13 @@ import { IBusketPage, IStore, IBasketItem } from "../types";
 import { BusketTable } from "../UI/components/BusketTable";
 import { formatNumber } from "../helpers";
 
-export const Busket = () => {
-  const state = useSelector<IStore, IBusketPage>((store) => store.busketPage);
+export const Busket = ({
+  allTotalCount,
+  allTotalCost,
+  busketItems,
+}: IBusketPage) => {
   const dispatch = useDispatch();
 
-  const { busketItems } = state;
   const products = Object.values(busketItems);
 
   const onRemoveProduct = (product: IBasketItem) => {
@@ -32,12 +34,10 @@ export const Busket = () => {
         </EmptyMessage>
       ) : (
         <>
-          <AllTotalCount>
-            Товаров в корзине: {state.allTotalCount}
-          </AllTotalCount>
+          <AllTotalCount>Товаров в корзине: {allTotalCount}</AllTotalCount>
 
           <AllTotalCost>
-            Общая сумма: {formatNumber(state.allTotalCost)} $
+            Общая сумма: {formatNumber(allTotalCost)} $
           </AllTotalCost>
 
           <BusketTable

@@ -4,30 +4,31 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveProducts, receiveProductsByDealers } from "../redux/actions";
 import { addProduct, changeCountProduct } from "../redux/busket/actions";
-import { IDealer, IProductItem, IBasketItem, IStore } from "../types";
+import {
+  IDealer,
+  IProductItem,
+  IBasketItem,
+  IStore,
+  ICatalogPage,
+  IBusketPage,
+} from "../types";
 import { ProductCard } from "../UI/components/ProductCard";
 import { SearchFilter } from "../UI/components/SearchFilter";
-import { Spinner } from "../UI/components/spinner";
+import { Spinner } from "../UI/components/Spinner";
+import { selectDealers } from "../redux/catalog/actions";
 
 interface IProps {
+  products: { [name: string]: IProductItem[] };
+
+  busket: IBusketPage;
+  loading: boolean;
+
+  selectedDealers: IDealer[];
   dealers: IDealer[];
 }
 
-export const Catalog = ({ dealers }: IProps) => {
-  const state = useSelector<IStore, IStore>((store) => store);
+export const Catalog = ({ products, busket, loading, dealers }: IProps) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    onSearch();
-  }, []);
-
-  const onSearch = (IDs?: string[]) => {
-    if (IDs?.length > 0) {
-      dispatch(receiveProductsByDealers(IDs));
-    } else {
-      dispatch(receiveProducts());
-    }
-  };
 
   const plusProductHandler = (product: IProductItem) => {
     dispatch(addProduct(product));
@@ -37,17 +38,12 @@ export const Catalog = ({ dealers }: IProps) => {
     dispatch(changeCountProduct(product.name, addedCount - 1));
   };
 
-  const {
-    catalogPage: { products, loading },
-    busketPage,
-  } = state;
-
   const productsArray = Object.values(products);
 
   const productsLenght = productsArray.length;
   return (
     <>
-      <SearchFilter dealers={dealers} onSearch={onSearch} />
+      <SearchFilter dealers={dealers} onSearch={() => {}} />
 
       {loading ? (
         <Spinner />
@@ -63,8 +59,8 @@ export const Catalog = ({ dealers }: IProps) => {
                     key={product.name}
                     product={product}
                     addedCount={
-                      busketPage.busketItems[product.name]
-                        ? busketPage.busketItems[product.name].totalCount
+                      busket.busketItems[product.name]
+                        ? busket.busketItems[product.name].totalCount
                         : 0
                     }
                     onPlus={plusProductHandler}

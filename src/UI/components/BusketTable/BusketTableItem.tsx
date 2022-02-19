@@ -10,6 +10,7 @@ import { Button } from "../styles";
 import { formatNumber } from "../../../helpers";
 import { changeCountProduct } from "../../../redux/busket/actions";
 import caretIcon from "../../img/caretUp.svg";
+import { ConfirmModal } from "../ConfirmModal";
 
 interface IBusketTableItemProps {
   product: IBusketItem;
@@ -21,10 +22,12 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
   const [count, setCount] = useState<number>(product.totalCount);
   const dispatch = useDispatch();
 
+  const [visibleConfirmModal, setVisibleConfirmModal] = useState(false);
+
   useEffect(() => {
     if (count === product.totalCount) return;
     dispatch(changeCountProduct(product.name, count));
-  }, [count, product.name]);
+  }, [count, product.totalCount, product.name, dispatch]);
 
   const removeProductHandler = () => {
     onRemoveProduct(product);
@@ -41,41 +44,60 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
   };
 
   const minusCount = () => {
-    if (count === 0) return;
+    if (count === 1) {
+      showVisibleConfirmModal();
+      return;
+    }
     setCount((prevState) => prevState - 1);
   };
+
+  const showVisibleConfirmModal = () => {
+    setVisibleConfirmModal(true);
+  };
+
+  const hideVisibleConfirmModal = () => {
+    setVisibleConfirmModal(false);
+  };
   return (
-    <TableRow>
-      <ProductNameColumn>
-        <img src={productImage} alt="" />
-        <span>{product.name}</span>
-      </ProductNameColumn>
+    <>
+      <TableRow>
+        <ProductNameColumn>
+          <img src={productImage} alt="" />
+          <span>{product.name}</span>
+        </ProductNameColumn>
 
-      <CounterContainer>
-        <CounterInputContainer>
-          <CounterInput
-            type="number"
-            value={count}
-            onChange={onChangeInput}
-            isRed={count === 0}
-          />
-        </CounterInputContainer>
-        <CounerTriggers>
-          <CounerTriggerButton onClick={plusCount}>
-            <img src={caretIcon} alt="" />
-          </CounerTriggerButton>
-          <CounerTriggerButton onClick={minusCount}>
-            <img src={caretIcon} alt="" />
-          </CounerTriggerButton>
-        </CounerTriggers>
-      </CounterContainer>
+        <CounterContainer>
+          <CounterInputContainer>
+            <CounterInput
+              type="number"
+              value={count}
+              onChange={onChangeInput}
+            />
+          </CounterInputContainer>
+          <CounerTriggers>
+            <CounerTriggerButton onClick={plusCount}>
+              <img src={caretIcon} alt="" />
+            </CounerTriggerButton>
+            <CounerTriggerButton onClick={minusCount}>
+              <img src={caretIcon} alt="" />
+            </CounerTriggerButton>
+          </CounerTriggers>
+        </CounterContainer>
 
-      <b>{formatNumber(product.price)} $</b>
+        <b>{formatNumber(product.price)} $</b>
 
-      <b>{formatNumber(product.totalCost)} $</b>
+        <b>{formatNumber(product.totalCost)} $</b>
 
-      <RemoveButton onClick={removeProductHandler} />
-    </TableRow>
+        <RemoveButton onClick={showVisibleConfirmModal} />
+      </TableRow>
+      <ConfirmModal
+        isOpen={visibleConfirmModal}
+        title="Удаление продукта"
+        description="Вы действительно хотите удалить продукт из корзины?"
+        onClose={hideVisibleConfirmModal}
+        onConfirm={removeProductHandler}
+      />
+    </>
   );
 };
 
@@ -121,13 +143,12 @@ const CounterInputContainer = styled.div`
   width: calc(50% - 10px);
 `;
 
-const CounterInput = styled.input<{ isRed: boolean }>`
+const CounterInput = styled.input`
   outline: none;
   border: none;
   width: 100%;
   height: 100%;
   margin: 0;
-  color: ${({ isRed }) => (isRed ? "#c21750" : "#3d3d3d")};
   text-align: center;
   padding: 0;
 
