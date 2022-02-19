@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
 import { IBusketItem } from "../../../types";
 import { TableRow } from "./styles";
 import productImage from "../../img/node.png";
-import trashIcon from "../../img/trash.svg";
-import { Button } from "../styles";
+import { Button, RemoveButton } from "../styles";
 import { formatNumber } from "../../../helpers";
 import { changeCountProduct } from "../../../redux/busket/actions";
 import caretIcon from "../../img/caretUp.svg";
@@ -88,7 +87,10 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
 
         <b>{formatNumber(product.totalCost)} $</b>
 
-        <RemoveButton onClick={showVisibleConfirmModal} />
+        <RemoveButton
+          title="Удаление продукта"
+          onClick={showVisibleConfirmModal}
+        />
       </TableRow>
       <ConfirmModal
         isOpen={visibleConfirmModal}
@@ -109,14 +111,6 @@ const ProductNameColumn = styled.div`
     height: 158px;
   }
   margin-right: 18px;
-`;
-
-const RemoveButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  background-image: url(${trashIcon});
-  background-size: 32px;
-  background-repeat: no-repeat;
 `;
 
 const CounterContainer = styled.div`
@@ -170,12 +164,22 @@ const CounerTriggers = styled.div`
 
 const CounerTriggerButton = styled(Button)`
   color: black;
-  width: 25px;
+  width: 100%;
   height: 25px;
   padding: 0;
+
+  :nth-child(1) {
+    border-top-right-radius: 10px;
+  }
+
   :nth-child(2) {
+    border-bottom-right-radius: 10px;
     img {
       transform: rotate(180deg);
     }
+  }
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
