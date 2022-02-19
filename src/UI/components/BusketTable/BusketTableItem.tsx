@@ -34,7 +34,10 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
 
   const onChangeInput = (ev) => {
     const { value } = ev.currentTarget;
-    if (value < 0) return;
+    if (value < 1) {
+      showVisibleConfirmModal();
+      return;
+    }
     setCount(Number(ev.currentTarget.value));
   };
 
