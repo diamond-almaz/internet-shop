@@ -1,21 +1,24 @@
 import { ICatalogPage } from "../../types";
-import {
-  LOAD_PRODUCTS_END,
-  LOAD_PRODUCTS_START,
-  SET_PRODUCTS,
-} from "./actions";
+import { LOAD_PRODUCTS_START, SET_PRODUCTS } from "./actions";
 
 const initialState: ICatalogPage = {
-  products: [],
+  products: {},
   loading: false,
 };
 
 export const catalogPageReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case SET_PRODUCTS: {
+      const products = {};
+
+      action.products.forEach((product) => {
+        products[product.name] = product;
+      });
+
       return {
         ...state,
-        products: action.products,
+        products,
+        loading: false,
       };
     }
 
@@ -23,13 +26,6 @@ export const catalogPageReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: true,
-      };
-    }
-
-    case LOAD_PRODUCTS_END: {
-      return {
-        ...state,
-        loading: false,
       };
     }
 

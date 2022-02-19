@@ -2,14 +2,12 @@ import { takeEvery, put, fork, all } from "redux-saga/effects";
 import { getProductByDealer, getProducts } from "../../api";
 import { IDealer, IProductItem } from "../../types";
 import { RECEIVE_PRODUCTS, RECEIVE_PRODUCTS_BY_DEALER } from "../actions";
-import { loadProductsEnd, loadProductsStart, setProducts } from "./actions";
+import { loadProductsStart, setProducts } from "./actions";
 
 function* workReceiveProducts() {
   yield put(loadProductsStart());
 
   const data: IProductItem[] = yield getProducts();
-
-  yield put(loadProductsEnd());
 
   yield put(setProducts(data));
 }
@@ -27,8 +25,6 @@ function* workReceiveProductsByDealer({
   yield put(loadProductsStart());
 
   const data: IProductItem[] = yield getProductByDealer(IDs);
-
-  yield put(loadProductsEnd());
 
   yield put(setProducts(data));
 }

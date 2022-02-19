@@ -11,8 +11,7 @@ export interface IProductItem {
 }
 
 export interface ICatalogPage {
-  products: IProductItem[];
-
+  products: { [name: string]: IProductItem[] };
   loading: boolean;
 }
 

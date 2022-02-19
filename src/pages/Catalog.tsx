@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { receiveProducts, receiveProductsByDealers } from "../redux/actions";
 import { addProduct } from "../redux/busket/actions";
 import { ICatalogPage, IDealer, IProductItem, IStore } from "../types";
 import { ProductCard } from "../UI/components/ProductCard";
-import { Header } from "../UI/components/Header";
 import { SearchFilter } from "../UI/components/SearchFilter";
 import { Spinner } from "../UI/components/spinner";
 
@@ -37,7 +35,9 @@ export const Catalog = ({ dealers }: IProps) => {
 
   const { products, loading } = state;
 
-  const productsLenght = products.length;
+  const productsArray = Object.values(products);
+
+  const productsLenght = productsArray.length;
   return (
     <>
       <SearchFilter dealers={dealers} onSearch={onSearch} />
@@ -50,7 +50,7 @@ export const Catalog = ({ dealers }: IProps) => {
 
           <ProductCardsWrapper>
             {productsLenght > 0 &&
-              state.products.map((product) => {
+              productsArray.map((product) => {
                 return (
                   <ProductCard
                     key={product.name}
