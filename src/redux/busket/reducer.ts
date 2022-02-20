@@ -52,17 +52,17 @@ export const busketPageReducer = (
     }
 
     case REMOVE_PRODUCT: {
-      const addedProduct: IBusketItem = action.product;
+      const { name, totalCount, totalCost }: IBusketItem = action.product;
 
-      delete newBasketItems[addedProduct.name];
+      delete newBasketItems[name];
       return {
         ...state,
         busketItems: newBasketItems,
         allTotalCount: Number(
-          new BigNumber(state.allTotalCount).minus(addedProduct.totalCount)
+          new BigNumber(state.allTotalCount).minus(totalCount)
         ),
         allTotalCost: Number(
-          new BigNumber(state.allTotalCost).minus(addedProduct.totalCost)
+          new BigNumber(state.allTotalCost).minus(totalCost)
         ),
       };
     }
@@ -74,25 +74,26 @@ export const busketPageReducer = (
     case CHANGE_COUNT_PRODUCT: {
       const { name, count } = action;
       const changedProduct = newBasketItems[name];
+      const { totalCount, totalCost, price } = changedProduct;
 
       const allTotalCount = Number(
-        new BigNumber(state.allTotalCount)
-          .minus(changedProduct.totalCount)
-          .plus(count)
+        new BigNumber(state.allTotalCount).minus(totalCount).plus(count)
       );
       const allTotalCost = Number(
         new BigNumber(state.allTotalCost)
-          .minus(changedProduct.totalCost)
-          .plus(new BigNumber(changedProduct.price).multipliedBy(count))
+          .minus(totalCost)
+          .plus(new BigNumber(price).multipliedBy(count))
       );
 
-      newBasketItems[name] = {
-        ...changedProduct,
-        totalCost: Number(
-          new BigNumber(count).multipliedBy(changedProduct.price)
-        ),
-        totalCount: count,
-      };
+      if (count === 0) {
+        delete newBasketItems[name];
+      } else {
+        newBasketItems[name] = {
+          ...changedProduct,
+          totalCost: Number(new BigNumber(count).multipliedBy(price)),
+          totalCount: count,
+        };
+      }
 
       return {
         ...state,
@@ -101,39 +102,6 @@ export const busketPageReducer = (
         allTotalCost,
       };
     }
-
-    // case MINUS_COUNT_PRODUCT: {
-    //   const { name } = action;
-
-    //   const changedProduct = newBasketItems[name];
-
-    //   changedProduct.totalCount -= 1;
-    //   changedProduct.totalCost -= changedProduct.price;
-
-    //   return {
-    //     ...state,
-    //     busketItems: newBasketItems,
-    //     allTotalCount: state.allTotalCount - 1,
-    //     allTotalCost: state.allTotalCost - changedProduct.price,
-    //   }
-    // }
-
-    // case PLUS_COUNT_PRODUCT: {
-    //   const { name } = action;
-
-    //   const changedProduct = newBasketItems[name];
-
-    //   changedProduct.totalCount += 1;
-    //   changedProduct.totalCost += changedProduct.price;
-
-    //   return {
-    //     ...state,
-    //     busketItems: newBasketItems,
-    //     allTotalCount: state.allTotalCount + 1,
-    //     allTotalCost: state.allTotalCost + changedProduct.price,
-    //   }
-    // }
-
     default: {
       return state;
     }

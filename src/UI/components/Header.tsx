@@ -31,8 +31,9 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.span`
-  font-size: 96px;
-  line-height: 112px;
+  font-size: 7vw;
+  line-height: 100%;
+  margin-bottom: 15px;
 `;
 
 const BreadCrumbs = styled.div`
