@@ -41,7 +41,7 @@ export const BusketTable = (props: IBusketTableProps) => {
           <RemoveAllColumn>
             Удалить
             <RemoveButton
-              title="Удаление всех продуктов"
+              title='Удаление всех продуктов'
               onClick={showVisibleConfirmModal}
             />
           </RemoveAllColumn>
