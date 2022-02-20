@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
-import { IBusketItem } from "../../../types";
-import { TableRow } from "./styles";
-import productImage from "../../img/node.png";
-import { Button, RemoveButton } from "../styles";
-import { formatNumber } from "../../../helpers";
-import { changeCountProduct } from "../../../redux/busket/actions";
-import caretIcon from "../../img/caretUp.svg";
-import { ConfirmModal } from "../ConfirmModal";
+import { IBusketItem } from '../../../types';
+import { TableRow } from './styles';
+import productImage from '../../img/node.png';
+import { Button, RemoveButton } from '../styles';
+import { formatNumber } from '../../../helpers';
+import { changeCountProduct } from '../../../redux/busket/actions';
+import caretIcon from '../../img/caretUp.svg';
+import { ConfirmModal } from '../ConfirmModal';
 
 interface IBusketTableItemProps {
   product: IBusketItem;
@@ -75,24 +75,24 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
     <>
       <TableRow>
         <ProductNameColumn>
-          <img src={productImage} alt="" />
+          <img src={productImage} alt='' />
           <span>{product.name}</span>
         </ProductNameColumn>
 
         <CounterContainer>
           <CounterInputContainer>
             <CounterInput
-              type="number"
+              type='number'
               value={count}
               onChange={onChangeInput}
             />
           </CounterInputContainer>
           <CounerTriggers>
             <CounerTriggerButton onClick={plusCount}>
-              <img src={caretIcon} alt="" />
+              <img src={caretIcon} alt='' />
             </CounerTriggerButton>
             <CounerTriggerButton onClick={minusCount}>
-              <img src={caretIcon} alt="" />
+              <img src={caretIcon} alt='' />
             </CounerTriggerButton>
           </CounerTriggers>
         </CounterContainer>
@@ -102,14 +102,14 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
         <b>{formatNumber(product.totalCost)} $</b>
 
         <RemoveButton
-          title="Удаление продукта"
+          title='Удаление продукта'
           onClick={showVisibleConfirmModal}
         />
       </TableRow>
       <ConfirmModal
         isOpen={visibleConfirmModal}
-        title="Удаление продукта"
-        description="Вы действительно хотите удалить продукт из корзины?"
+        title='Удаление продукта'
+        description='Вы действительно хотите удалить продукт из корзины?'
         onClose={hideVisibleConfirmModal}
         onConfirm={removeProductHandler}
       />
@@ -137,7 +137,7 @@ const CounterContainer = styled.div`
   border-radius: 10px;
   box-sizing: border-box;
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     right: 50%;

@@ -1,27 +1,27 @@
-import React from "react";
-import styled from "styled-components";
-import Modal from "react-modal";
+import React from 'react';
+import styled from 'styled-components';
+import Modal from 'react-modal';
 
-import { Button } from "./styles";
-import closeIcon from "../img/close.svg";
-import { MAIN_COLOR } from "../../constants";
+import { Button } from './styles';
+import closeIcon from '../img/close.svg';
+import { MAIN_COLOR } from '../../constants';
 
 const customStyles = {
   overlay: {
     zIndex: 2,
   },
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    padding: "15px",
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '15px',
   },
 };
 
-Modal.setAppElement("#app");
+Modal.setAppElement('#app');
 
 interface IConfirmModal {
   isOpen: boolean;
@@ -51,7 +51,7 @@ export const ConfirmModal = ({
         <Header>
           <span>{title}</span>
           <CloseButton onClick={onClose}>
-            <img src={closeIcon} alt="" />
+            <img src={closeIcon} alt='' />
           </CloseButton>
         </Header>
 

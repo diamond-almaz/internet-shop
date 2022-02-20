@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Select, { MultiValue } from "react-select";
-import { IDealer } from "../../types";
+import React from 'react';
+import styled from 'styled-components';
+import Select, { MultiValue } from 'react-select';
+import { IDealer } from '../../types';
 
 interface ISearchFilter {
   dealers: IDealer[];
@@ -33,8 +33,8 @@ export const SearchFilter = (props: ISearchFilter) => {
       <Select
         isClearable
         isMulti
-        className="Select"
-        placeholder="Выбрать диллера"
+        className='Select'
+        placeholder='Выбрать диллера'
         options={dealersOptions}
         onChange={selectHandler}
       />

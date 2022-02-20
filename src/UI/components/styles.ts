@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import trashIcon from "../img/trash.svg";
+import styled from 'styled-components';
+import trashIcon from '../img/trash.svg';
 
 export const Button = styled.button`
   background-color: transparent;

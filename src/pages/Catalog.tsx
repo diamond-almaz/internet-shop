@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
-import { addProduct, changeCountProduct } from "../redux/busket/actions";
-import { IDealer, IProductItem, IBusketPage } from "../types";
-import { ProductCard } from "../UI/components/ProductCard";
-import { SearchFilter } from "../UI/components/SearchFilter";
-import { Spinner } from "../UI/components/Spinner";
-import { selectDealers } from "../redux/catalog/actions";
+import { addProduct, changeCountProduct } from '../redux/busket/actions';
+import { IDealer, IProductItem, IBusketPage } from '../types';
+import { ProductCard } from '../UI/components/ProductCard';
+import { SearchFilter } from '../UI/components/SearchFilter';
+import { Spinner } from '../UI/components/Spinner';
+import { selectDealers } from '../redux/catalog/actions';
 
 interface IProps {
   products: { [name: string]: IProductItem };

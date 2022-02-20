@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import caretRightIcon from "../img/caretRight.svg";
+import React from 'react';
+import styled from 'styled-components';
+import caretRightIcon from '../img/caretRight.svg';
 
 interface IHeaderProps {
   title: string;
@@ -12,7 +12,7 @@ export const Header = ({ title }: IHeaderProps) => {
       <Title>{title}</Title>
       <BreadCrumbs>
         Главная
-        <img src={caretRightIcon} alt="" />
+        <img src={caretRightIcon} alt='' />
         {title}
       </BreadCrumbs>
     </Wrapper>

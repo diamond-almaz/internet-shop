@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { IProductItem } from "../../../types";
-import { MAIN_COLOR } from "../../../constants";
-import { Button } from "../styles";
+import { IProductItem } from '../../../types';
+import { MAIN_COLOR } from '../../../constants';
+import { Button } from '../styles';
 
-import productImage from "../../img/node.png";
-import shoppingCart from "../../img/shoppingCart.svg";
-import plusIcon from "../../img/plus.svg";
-import minusIcon from "../../img/minus.svg";
+import productImage from '../../img/node.png';
+import shoppingCart from '../../img/shoppingCart.svg';
+import plusIcon from '../../img/plus.svg';
+import minusIcon from '../../img/minus.svg';
 
 interface IProductCardProps {
   product: IProductItem;
@@ -35,7 +35,7 @@ export const ProductCard = (props: IProductCardProps) => {
   return (
     <Wrapper>
       <Content>
-        <ProductImage src={productImage} alt="" />
+        <ProductImage src={productImage} alt='' />
 
         <ProductName>{product.name}</ProductName>
 
@@ -44,21 +44,21 @@ export const ProductCard = (props: IProductCardProps) => {
       {addedCount !== 0 ? (
         <CounterContainer>
           <CounterButton onClick={onPlusHandler}>
-            <img src={plusIcon} alt="" />
+            <img src={plusIcon} alt='' />
           </CounterButton>
 
           <Count>
-            <img className="shoppingCart" src={shoppingCart} alt="" />
+            <img className='shoppingCart' src={shoppingCart} alt='' />
             <span>{addedCount}</span>
           </Count>
 
           <CounterButton onClick={onMinusHandler}>
-            <img src={minusIcon} alt="" />
+            <img src={minusIcon} alt='' />
           </CounterButton>
         </CounterContainer>
       ) : (
         <AddButton onClick={onPlusHandler}>
-          <img className="shoppingCart" src={shoppingCart} alt="" />
+          <img className='shoppingCart' src={shoppingCart} alt='' />
 
           <b>Добавить</b>
         </AddButton>

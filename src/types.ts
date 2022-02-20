@@ -1,5 +1,3 @@
-import { rootReducer } from "./redux/reducers";
-
 export interface IDealer {
   id: string;
 }
@@ -35,6 +33,6 @@ export interface IStore {
   busketPage: IBusketPage;
 }
 
-export interface IAction {
-  type: string;
+export interface IAction<T> {
+  type: T;
 }

@@ -1,8 +1,8 @@
-import { IDealer } from "../types";
+import { IDealer } from '../types';
 
 enum Cmds {
-  goods = "goods",
-  dealers = "dealers",
+  goods = 'goods',
+  dealers = 'dealers',
 }
 
 const request = async (cmd: string | Cmds) => {

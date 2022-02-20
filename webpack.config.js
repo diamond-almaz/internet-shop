@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
 
 const getOptimization = () => {
   const config = {
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
     },
   };
 
@@ -30,7 +30,7 @@ const cssLoaders = (extra) => {
       loader: MiniCssExtractPlugin.loader,
       options: {},
     },
-    "css-loader",
+    'css-loader',
   ];
 
   if (extra) {
@@ -47,13 +47,13 @@ const babelOptions = (presets) => {
   const defaultOptions = {
     presets: [
       [
-        "@babel/preset-env",
+        '@babel/preset-env',
         {
-          useBuiltIns: "entry",
+          useBuiltIns: 'entry',
         },
       ],
     ],
-    plugins: ["@babel/plugin-proposal-class-properties"],
+    plugins: ['@babel/plugin-proposal-class-properties'],
   };
 
   if (presets) {
@@ -64,16 +64,16 @@ const babelOptions = (presets) => {
 };
 
 module.exports = {
-  context: path.resolve(__dirname, "src"),
+  context: path.resolve(__dirname, 'src'),
 
   entry: {
-    app: ["@babel/polyfill", "./app.tsx"],
+    app: ['@babel/polyfill', './app.tsx'],
   },
 
   output: {
-    filename: getFileName("js"),
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
+    filename: getFileName('js'),
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
 
   optimization: getOptimization(),
@@ -85,11 +85,11 @@ module.exports = {
     historyApiFallback: true,
   },
 
-  devtool: isDev ? "source-map" : false,
+  devtool: isDev ? 'source-map' : false,
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: "./index.html",
+      template: './index.html',
       minify: {
         collapseWhitespace: isProd,
       },
@@ -98,18 +98,18 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/favicon.ico"),
-          to: path.resolve(__dirname, "dist"),
+          from: path.resolve(__dirname, 'src/favicon.ico'),
+          to: path.resolve(__dirname, 'dist'),
         },
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: getFileName("css"),
+      filename: getFileName('css'),
     }),
   ],
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 
   performance: {
@@ -126,21 +126,21 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/,
-        use: cssLoaders("sass-loader"),
+        use: cssLoaders('sass-loader'),
       },
       {
         test: /\.(png|jpg|jpeg|svg|gif)$/,
-        use: ["file-loader"],
+        use: ['file-loader'],
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
-        use: ["file-loader"],
+        use: ['file-loader'],
       },
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: babelOptions(),
         },
       },
@@ -148,10 +148,10 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: babelOptions([
-            "@babel/preset-react",
-            "@babel/preset-typescript",
+            '@babel/preset-react',
+            '@babel/preset-typescript',
           ]),
         },
       },

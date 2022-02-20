@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import { IBusketItem } from "../../../types";
-import { RemoveButton } from "../styles";
-import { BusketTableItem } from "./BusketTableItem";
-import { TableRow } from "./styles";
-import { ConfirmModal } from "../ConfirmModal";
+import { IBusketItem } from '../../../types';
+import { RemoveButton } from '../styles';
+import { BusketTableItem } from './BusketTableItem';
+import { TableRow } from './styles';
+import { ConfirmModal } from '../ConfirmModal';
 
 interface IBusketTableProps {
   products: IBusketItem[];
@@ -54,8 +54,8 @@ export const BusketTable = (props: IBusketTableProps) => {
 
       <ConfirmModal
         isOpen={visibleConfirmModal}
-        title="Удаление всех продуктов"
-        description="Вы действительно хотите удалить все продукты из корзины?"
+        title='Удаление всех продуктов'
+        description='Вы действительно хотите удалить все продукты из корзины?'
         onClose={hideVisibleConfirmModal}
         onConfirm={onRemoveAll}
       />

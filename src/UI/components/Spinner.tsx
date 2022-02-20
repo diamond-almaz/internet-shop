@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { MAIN_COLOR } from "../../constants";
+import React from 'react';
+import styled from 'styled-components';
+import { MAIN_COLOR } from '../../constants';
 
 export const Spinner = () => {
   return (
     <Wrapper>
-      <div className="lds-ring">
+      <div className='lds-ring'>
         <div></div>
         <div></div>
         <div></div>

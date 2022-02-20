@@ -1,8 +1,8 @@
-import { takeEvery, put, fork, all } from "redux-saga/effects";
-import { getProductByDealer, getProducts } from "../../api";
-import { IDealer, IProductItem } from "../../types";
-import { RECEIVE_PRODUCTS, RECEIVE_PRODUCTS_BY_DEALER } from "../actions";
-import { loadProductsStart, setProducts } from "./actions";
+import { takeEvery, put, fork, all } from 'redux-saga/effects';
+import { getProductByDealer, getProducts } from '../../api';
+import { IDealer, IProductItem } from '../../types';
+import { RECEIVE_PRODUCTS, RECEIVE_PRODUCTS_BY_DEALER } from '../actions';
+import { loadProductsStart, setProducts } from './actions';
 
 function* workReceiveProducts() {
   yield put(loadProductsStart());

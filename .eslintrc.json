@@ -12,7 +12,6 @@
         "google",
         "plugin:prettier/recommended",
         "prettier"
-        // "prettier/react"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

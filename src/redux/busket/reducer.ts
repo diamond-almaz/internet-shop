@@ -1,11 +1,11 @@
-import { IBusketItem, IBusketPage } from "../../types";
+import { IBusketItem, IBusketPage } from '../../types';
 import {
   ADD_PRODUCT,
   CHANGE_COUNT_PRODUCT,
   REMOVE_ALL,
   REMOVE_PRODUCT,
-} from "./actions";
-import { BigNumber } from "bignumber.js";
+} from './actions';
+import { BigNumber } from 'bignumber.js';
 
 const initialState: IBusketPage = {
   busketItems: {},

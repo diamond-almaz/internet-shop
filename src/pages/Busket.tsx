@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { useDispatch } from "react-redux";
-import { removeProduct, removeAll } from "../redux/busket/actions";
-import { IBusketPage, IBusketItem } from "../types";
-import { BusketTable } from "../UI/components/BusketTable";
-import { formatNumber } from "../helpers";
+import { useDispatch } from 'react-redux';
+import { removeProduct, removeAll } from '../redux/busket/actions';
+import { IBusketPage, IBusketItem } from '../types';
+import { BusketTable } from '../UI/components/BusketTable';
+import { formatNumber } from '../helpers';
 
 export const Busket = ({
   allTotalCount,
@@ -36,7 +36,7 @@ export const Busket = ({
       {products.length === 0 ? (
         <EmptyMessage>
           Корзина пустая, добавьте товары из &nbsp;
-          <Link to="/">каталога</Link>
+          <Link to='/'>каталога</Link>
         </EmptyMessage>
       ) : (
         <>
