@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 import { IBusketItem } from "../../../types";
-import { Button, RemoveButton } from "../styles";
+import { RemoveButton } from "../styles";
 import { BusketTableItem } from "./BusketTableItem";
 import { TableRow } from "./styles";
-import trashIcon from "../../img/trash.svg";
 import { ConfirmModal } from "../ConfirmModal";
 
 interface IBusketTableProps {
   products: IBusketItem[];
   onRemoveProduct: (product: IBusketItem) => void;
-  onRemoveAll?: () => void;
+  onRemoveAll: () => void;
 }
 
 export const BusketTable = (props: IBusketTableProps) => {
   const { products, onRemoveProduct, onRemoveAll } = props;
 
   const [visibleConfirmModal, setVisibleConfirmModal] = useState(false);
+
+  // ---------------------------------------------------
 
   const showVisibleConfirmModal = () => {
     setVisibleConfirmModal(true);
@@ -25,6 +27,8 @@ export const BusketTable = (props: IBusketTableProps) => {
   const hideVisibleConfirmModal = () => {
     setVisibleConfirmModal(false);
   };
+
+  // ---------------------------------------------------
 
   return (
     <>

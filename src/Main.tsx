@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-import { IBusketPage, IDealer, IStore } from "./types";
-import { Provider, useDispatch, useSelector } from "react-redux";
-import { store } from "./redux";
+import { IDealer, IStore } from "./types";
 import { Catalog } from "./pages/Catalog";
 import { Busket } from "./pages/Busket";
 import { MAIN_COLOR } from "./constants";

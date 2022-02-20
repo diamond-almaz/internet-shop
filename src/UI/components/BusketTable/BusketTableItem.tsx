@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
@@ -18,23 +18,29 @@ interface IBusketTableItemProps {
 
 export const BusketTableItem = (props: IBusketTableItemProps) => {
   const { product, onRemoveProduct } = props;
-  const [count, setCount] = useState<number>(product.totalCount);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const [count, setCount] = useState<number>(product.totalCount);
   const [visibleConfirmModal, setVisibleConfirmModal] = useState(false);
+
+  // ---------------------------------------------------
 
   useEffect(() => {
     if (count === product.totalCount) return;
     dispatch(changeCountProduct(product.name, count));
   }, [count, product.totalCount, product.name, dispatch]);
 
+  // ---------------------------------------------------
+
   const removeProductHandler = () => {
     onRemoveProduct(product);
   };
 
-  const onChangeInput = (ev) => {
+  // ---------------------------------------------------
+
+  const onChangeInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = ev.currentTarget;
-    if (value < 1) {
+    if (Number(value) < 1) {
       showVisibleConfirmModal();
       return;
     }
@@ -53,6 +59,8 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
     setCount((prevState) => prevState - 1);
   };
 
+  // ---------------------------------------------------
+
   const showVisibleConfirmModal = () => {
     setVisibleConfirmModal(true);
   };
@@ -60,6 +68,9 @@ export const BusketTableItem = (props: IBusketTableItemProps) => {
   const hideVisibleConfirmModal = () => {
     setVisibleConfirmModal(false);
   };
+
+  // ---------------------------------------------------
+
   return (
     <>
       <TableRow>

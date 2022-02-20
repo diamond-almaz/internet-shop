@@ -11,7 +11,7 @@ export interface IProductItem {
 }
 
 export interface ICatalogPage {
-  products: { [name: string]: IProductItem[] };
+  products: { [name: string]: IProductItem };
 
   selectedDealers: IDealer[];
   loading: boolean;
@@ -35,6 +35,6 @@ export interface IStore {
   busketPage: IBusketPage;
 }
 
-type RootReducerType = typeof rootReducer; // (globalstate: AppStateType) => AppStateType
-
-export type AppStateType = ReturnType<RootReducerType>;
+export interface IAction {
+  type: string;
+}

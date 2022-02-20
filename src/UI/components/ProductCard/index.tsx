@@ -20,6 +20,8 @@ interface IProductCardProps {
 export const ProductCard = (props: IProductCardProps) => {
   const { product, addedCount, onPlus, onMinus } = props;
 
+  // ---------------------------------------------------
+
   const onPlusHandler = () => {
     onPlus(product);
   };
@@ -27,6 +29,8 @@ export const ProductCard = (props: IProductCardProps) => {
   const onMinusHandler = () => {
     onMinus(product, addedCount);
   };
+
+  // ---------------------------------------------------
 
   return (
     <Wrapper>

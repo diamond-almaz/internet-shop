@@ -1,26 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import Select from "react-select";
+import Select, { MultiValue } from "react-select";
 import { IDealer } from "../../types";
-import { MAIN_COLOR } from "../../constants";
-import { Button } from "./styles";
 
 interface ISearchFilter {
   dealers: IDealer[];
-  onSearch: (IDs: string[]) => void;
+  onSearch: (IDs: IDealer[]) => void;
 }
 
 export const SearchFilter = (props: ISearchFilter) => {
   const { dealers, onSearch } = props;
+
+  // ---------------------------------------------------
 
   const dealersOptions = dealers.map((id) => ({
     value: id,
     label: id,
   }));
 
-  const selectHandler = (data) => {
+  // ---------------------------------------------------
+
+  const selectHandler = (
+    data: MultiValue<{ value: IDealer; label: IDealer }>
+  ) => {
     onSearch(data.map(({ value }) => value));
   };
+
+  // ---------------------------------------------------
 
   return (
     <Wrapper>
@@ -50,15 +56,3 @@ const Wrapper = styled.div`
     width: 100%;
   }
 `;
-
-// const SelectWrapper = styled.div`
-// `;
-
-// const SearchButton = styled(Button)`
-//   font-family: Roboto;
-//   font-style: normal;
-//   font-weight: 500;
-//   background-color: ${MAIN_COLOR};
-//   padding: 9px 20px;
-//   border-radius: 5px;
-// `;

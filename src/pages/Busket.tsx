@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeProduct, removeAll } from "../redux/busket/actions";
-import { IBusketPage, IStore, IBasketItem } from "../types";
+import { IBusketPage, IBusketItem } from "../types";
 import { BusketTable } from "../UI/components/BusketTable";
 import { formatNumber } from "../helpers";
 
@@ -15,15 +15,21 @@ export const Busket = ({
 }: IBusketPage) => {
   const dispatch = useDispatch();
 
+  // ---------------------------------------------------
+
   const products = Object.values(busketItems);
 
-  const onRemoveProduct = (product: IBasketItem) => {
+  // ---------------------------------------------------
+
+  const onRemoveProduct = (product: IBusketItem) => {
     dispatch(removeProduct(product));
   };
 
   const onRemoveAll = () => {
     dispatch(removeAll());
   };
+
+  // ---------------------------------------------------
 
   return (
     <Wrapper>

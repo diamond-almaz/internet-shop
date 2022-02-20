@@ -1,24 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
-import { receiveProducts, receiveProductsByDealers } from "../redux/actions";
 import { addProduct, changeCountProduct } from "../redux/busket/actions";
-import {
-  IDealer,
-  IProductItem,
-  IBasketItem,
-  IStore,
-  ICatalogPage,
-  IBusketPage,
-} from "../types";
+import { IDealer, IProductItem, IBusketPage } from "../types";
 import { ProductCard } from "../UI/components/ProductCard";
 import { SearchFilter } from "../UI/components/SearchFilter";
 import { Spinner } from "../UI/components/Spinner";
 import { selectDealers } from "../redux/catalog/actions";
 
 interface IProps {
-  products: { [name: string]: IProductItem[] };
+  products: { [name: string]: IProductItem };
 
   busket: IBusketPage;
   loading: boolean;
@@ -30,21 +22,30 @@ interface IProps {
 export const Catalog = ({ products, busket, loading, dealers }: IProps) => {
   const dispatch = useDispatch();
 
+  // ---------------------------------------------------
+
+  const productsArray = Object.values(products);
+
+  const productsLenght = productsArray.length;
+
+  // ---------------------------------------------------
+
   const selectDealer = (IDs: IDealer[]) => {
     dispatch(selectDealers(IDs));
   };
+
+  // ---------------------------------------------------
 
   const plusProductHandler = (product: IProductItem) => {
     dispatch(addProduct(product));
   };
 
-  const minusProductHandler = (product: IBasketItem, addedCount: number) => {
+  const minusProductHandler = (product: IProductItem, addedCount: number) => {
     dispatch(changeCountProduct(product.name, addedCount - 1));
   };
 
-  const productsArray = Object.values(products);
+  // ---------------------------------------------------
 
-  const productsLenght = productsArray.length;
   return (
     <>
       <SearchFilter dealers={dealers} onSearch={selectDealer} />
