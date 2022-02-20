@@ -20,7 +20,7 @@ function* workReceiveProductsByDealer({
   IDs,
 }: {
   type: typeof RECEIVE_PRODUCTS_BY_DEALER;
-  IDs: string[];
+  IDs: IDealer[];
 }) {
   yield put(loadProductsStart());
 
@@ -30,7 +30,7 @@ function* workReceiveProductsByDealer({
 }
 
 function* watchReceiveProductsByDealer() {
-  yield takeEvery<{ type: typeof RECEIVE_PRODUCTS_BY_DEALER; IDs: string[] }>(
+  yield takeEvery<{ type: typeof RECEIVE_PRODUCTS_BY_DEALER; IDs: IDealer[] }>(
     RECEIVE_PRODUCTS_BY_DEALER,
     workReceiveProductsByDealer
   );

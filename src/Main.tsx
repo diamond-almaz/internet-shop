@@ -21,13 +21,17 @@ export const Main = ({ dealers }: IProps) => {
   const store = useSelector<IStore, IStore>((store) => store);
   const dispatch = useDispatch();
 
+  // ---------------------------------------------------
+
   const { busketPage, catalogPage } = store;
 
   const { allTotalCount } = busketPage;
 
+  // ---------------------------------------------------
+
   useEffect(() => {
     const IDs = store.catalogPage.selectedDealers;
-    console.log("IDs", IDs);
+
     if (IDs?.length > 0) {
       dispatch(receiveProductsByDealers(IDs));
     } else {

@@ -1,3 +1,5 @@
+import { IDealer } from "../types";
+
 enum Cmds {
   goods = "goods",
   dealers = "dealers",
@@ -15,5 +17,5 @@ export const getProducts = async () => request(Cmds.goods);
 
 export const getDealers = async () => request(Cmds.dealers);
 
-export const getProductByDealer = async (IDs: string[]) =>
+export const getProductByDealer = async (IDs: IDealer[]) =>
   request(`${Cmds.goods}?${Cmds.dealers}=${IDs.toString()}`);
