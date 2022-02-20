@@ -20,7 +20,6 @@ export const Main = ({ dealers }: IProps) => {
   const store = useSelector<IStore, IStore>((store) => store);
   const dispatch = useDispatch();
   const location = useLocation();
-  const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,11 +46,12 @@ export const Main = ({ dealers }: IProps) => {
   // ---------------------------------------------------
 
   return (
-    <Wrapper ref={ref}>
+    <Wrapper>
       <Navbar>
         <Link to='/'>
           <Logo>LOGO</Logo>
         </Link>
+        <Line />
         <Link to='/busket'>
           <BusketIcon>
             <img src={shoppingCartBigIcon} alt='' />
@@ -95,9 +95,18 @@ const Navbar = styled.div`
   background-color: ${MAIN_COLOR};
   height: 71px;
   width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
   a {
     text-decoration: none;
   }
+`;
+
+const Line = styled.div`
+  height: calc(100% - 30px);
+  width: 1px;
+  background-color: #ffffff;
+  margin: 0 15px;
 `;
 
 const Logo = styled.b`
