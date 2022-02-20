@@ -5,11 +5,13 @@ import { IDealer } from '../../types';
 
 interface ISearchFilter {
   dealers: IDealer[];
+  selectedDealers: IDealer[];
+
   onSearch: (IDs: IDealer[]) => void;
 }
 
 export const SearchFilter = (props: ISearchFilter) => {
-  const { dealers, onSearch } = props;
+  const { dealers, selectedDealers, onSearch } = props;
 
   // ---------------------------------------------------
 
@@ -35,6 +37,7 @@ export const SearchFilter = (props: ISearchFilter) => {
         isMulti
         className='Select'
         placeholder='Выбрать диллера'
+        value={selectedDealers.map((id) => ({ value: id, label: id }))}
         options={dealersOptions}
         onChange={selectHandler}
       />

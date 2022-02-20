@@ -19,7 +19,13 @@ interface IProps {
   dealers: IDealer[];
 }
 
-export const Catalog = ({ products, busket, loading, dealers }: IProps) => {
+export const Catalog = ({
+  products,
+  busket,
+  loading,
+  selectedDealers,
+  dealers,
+}: IProps) => {
   const dispatch = useDispatch();
 
   // ---------------------------------------------------
@@ -48,7 +54,11 @@ export const Catalog = ({ products, busket, loading, dealers }: IProps) => {
 
   return (
     <>
-      <SearchFilter dealers={dealers} onSearch={selectDealer} />
+      <SearchFilter
+        dealers={dealers}
+        selectedDealers={selectedDealers}
+        onSearch={selectDealer}
+      />
 
       {loading ? (
         <Spinner />
