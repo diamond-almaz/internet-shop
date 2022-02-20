@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 
-import { IDealer, IStore } from './types';
-import { Catalog } from './pages/Catalog';
-import { Busket } from './pages/Busket';
-import { MAIN_COLOR } from './constants';
-import { Header } from './UI/components/Header';
-import shoppingCartBigIcon from './UI/img/shoppingCartBig.svg';
-import { receiveProducts, receiveProductsByDealers } from './redux/actions';
+import { Route, Switch, Link, useLocation } from "react-router-dom";
+
+import { IBusketPage, IDealer, IStore } from "./types";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { store } from "./redux";
+import { Catalog } from "./pages/Catalog";
+import { Busket } from "./pages/Busket";
+import { MAIN_COLOR } from "./constants";
+import { Header } from "./UI/components/Header";
+import shoppingCartBigIcon from "./UI/img/shoppingCartBig.svg";
+import { receiveProducts, receiveProductsByDealers } from "./redux/actions";
 
 interface IProps {
   dealers: IDealer[];
@@ -18,6 +20,12 @@ interface IProps {
 export const Main = ({ dealers }: IProps) => {
   const store = useSelector<IStore, IStore>((store) => store);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const ref = useRef<HTMLDivElement>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   // ---------------------------------------------------
 
@@ -40,35 +48,33 @@ export const Main = ({ dealers }: IProps) => {
   // ---------------------------------------------------
 
   return (
-    <Router>
-      <Wrapper>
-        <Navbar>
-          <Link to='/'>
-            <Logo>LOGO</Logo>
-          </Link>
-          <Link to='/busket'>
-            <BusketIcon>
-              <img src={shoppingCartBigIcon} alt='' />
-              {allTotalCount > 0 && (
-                <AllTotalCount>{allTotalCount}</AllTotalCount>
-              )}
-            </BusketIcon>
-          </Link>
-        </Navbar>
-        <PageWrapper>
-          <Switch>
-            <Route path='/busket'>
-              <Header title='Корзина' />
-              <Busket {...busketPage} />
-            </Route>
-            <Route path='/'>
-              <Header title='Каталог' />
-              <Catalog {...catalogPage} busket={busketPage} dealers={dealers} />
-            </Route>
-          </Switch>
-        </PageWrapper>
-      </Wrapper>
-    </Router>
+    <Wrapper ref={ref}>
+      <Navbar>
+        <Link to="/">
+          <Logo>LOGO</Logo>
+        </Link>
+        <Link to="/busket">
+          <BusketIcon>
+            <img src={shoppingCartBigIcon} alt="" />
+            {allTotalCount > 0 && (
+              <AllTotalCount>{allTotalCount}</AllTotalCount>
+            )}
+          </BusketIcon>
+        </Link>
+      </Navbar>
+      <PageWrapper>
+        <Switch>
+          <Route path="/busket">
+            <Header title="Корзина" />
+            <Busket {...busketPage} />
+          </Route>
+          <Route path="/">
+            <Header title="Каталог" />
+            <Catalog {...catalogPage} busket={busketPage} dealers={dealers} />
+          </Route>
+        </Switch>
+      </PageWrapper>
+    </Wrapper>
   );
 };
 
